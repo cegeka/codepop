@@ -1,0 +1,21 @@
+sonarqube {
+    properties {
+        property "sonar.scm.provider", "git"
+        property "sonar.login", "admin"
+        property "sonar.password", "admin"
+        property "sonar.host.url", "http://sonarqube.ci:9000"
+        property "sonar.jacoco.itReportPath", "${buildDir}/jacoco/integrationTest.exec"
+        properties["sonar.tests"] += sourceSets.integrationTest.allSource.srcDirs
+        properties["sonar.tests"] += sourceSets.e2eTest.allSource.srcDirs
+    }
+}
+
+jacoco {
+    // Specifying specific (newer) JaCoCo version to remove warning.
+    // This is not the default JaCoCo version for the Gradle plugin, remove this version if problems arise.
+    // - https://docs.gradle.org/current/userguide/jacoco_plugin.html
+    // - http://eclemma.org/jacoco/
+    toolVersion = "0.7.5.201505241946"
+}
+
+project.tasks["sonarqube"].dependsOn e2eTest

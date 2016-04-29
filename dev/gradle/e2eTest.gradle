@@ -1,0 +1,26 @@
+sourceSets {
+    e2eTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/e2eTest/java')
+        }
+        resources.srcDir file('src/main/resources')
+    }
+}
+
+configurations {
+    e2eTestCompile.extendsFrom testCompile
+    e2eTestRuntime.extendsFrom testRuntime
+}
+
+task e2eTest(type: Test, dependsOn: 'build') {
+    group 'Verification'
+    description 'Runs the e2e tests.'
+    testClassesDir = sourceSets.e2eTest.output.classesDir
+    classpath = sourceSets.e2eTest.runtimeClasspath
+    binResultsDir = file("$buildDir/e2eTest-results/binary/e2eTest")
+    reports.junitXml.destination = "$buildDir/2eTest-results"
+    reports.html.destination = "$buildDir/reports/e2e2Test"
+    systemProperties['jar.path'] = jar.archivePath
+}

@@ -1,0 +1,15 @@
+import jenkins.model.*;
+import hudson.security.*;
+
+def jenkins = Jenkins.instance;
+jenkins.setNumExecutors(1);
+jenkins.setLabelString("linux docker");
+
+def hudsonRealm = new HudsonPrivateSecurityRealm(false);
+hudsonRealm.createAccount("admin","codepop4life");
+jenkins.setSecurityRealm(hudsonRealm);
+def strategy = new GlobalMatrixAuthorizationStrategy();
+strategy.add(Jenkins.ADMINISTER, "admin");
+jenkins.setAuthorizationStrategy(strategy);
+
+jenkins.save();

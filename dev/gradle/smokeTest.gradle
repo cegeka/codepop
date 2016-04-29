@@ -1,0 +1,14 @@
+task smokeTest << {
+    def jsonResponse = new URL(healthUrl).text
+    def jsonObject = new groovy.json.JsonSlurper().parseText(jsonResponse)
+
+    if (!"UP".equals(jsonObject.status)){
+        throw new GradleException("Health check failed for ${healthUrl}")
+    }
+}
+
+smokeTest.doFirst {
+    if (!project.hasProperty("healthUrl")) {
+        throw new GradleException("Expected 'healthUrl' project property")
+    }
+}

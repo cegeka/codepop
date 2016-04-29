@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+
+  db:
+    build: db/
+    container_name: db
+    ports:
+      - "27017:27017"
+    volumes:
+      - /data/db:/data/db
+
+networks:
+  default:
+    external:
+      name: codepopnw

@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+
+  jenkins:
+    image: cdsandbox/jenkins
+    container_name: jenkins
+    ports:
+      - "8888:8888"
+    volumes:
+      - /var/jenkins_home/:/var/jenkins_home/
+      - /run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/bin/docker
+      - /lib64/libdevmapper.so.1.02:/lib/x86_64-linux-gnu/libdevmapper.so.1.02
+    restart: always
+
+  sonarqube:
+    image: sonarqube:5.3
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://sonarqube_db.ci:5432/sonar
+    volumes:
+      - sonarqube-extensions:/opt/sonarqube/extensions
+      - sonarqube-plugins:/opt/sonarqube/lib/bundled-plugins
+    restart: always
+
+  sonarqube-db:
+    image: postgres:9.5
+    container_name: sonarqube_db
+    volumes:
+      - sonarqube-db:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    restart: always
+
+  registry:
+    image: registry:2.3.1
+    container_name: registry
+    ports:
+      - "5000:5000"
+    restart: always
+
+volumes:
+  sonarqube-db:
+    driver: local
+  sonarqube-plugins:
+    driver: local
+  sonarqube-extensions:
+    driver: local
+
+
+networks:
+  default:
+      external:
+        name: ci

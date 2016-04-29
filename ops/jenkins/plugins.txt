@@ -1,0 +1,39 @@
+# green balls
+greenballs:1.15
+
+# git dependencies
+git-client:1.19.1
+scm-api:1.0
+matrix-project:1.6
+credentials:1.24
+mailer:1.16
+ssh-credentials:1.11
+
+# git
+git:2.4.2
+
+# worfklow-aggregator dependencies
+script-security:1.15
+workflow-step-api:1.14
+workflow-basic-steps:1.14
+workflow-scm-step:1.14
+workflow-api:1.14
+durable-task:1.7
+workflow-support:1.14
+jquery-detached:1.2
+ace-editor:1.0.1
+workflow-cps:1.14
+git-server:1.6
+workflow-cps-global-lib:1.14
+workflow-job:1.14
+workflow-durable-task-step:1.14
+authentication-tokens:1.2
+
+#workflow plugin dependencies
+momentjs:1.1
+handlebars:1.1
+pipeline-rest-api:1.0
+
+# worklfow plugin
+workflow-aggregator:1.14
+pipeline-stage-view:1.0

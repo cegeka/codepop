@@ -1,0 +1,32 @@
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output
+            compileClasspath += test.output
+            runtimeClasspath += main.output
+            runtimeClasspath += test.output
+            srcDir file('src/integrationTest/java')
+        }
+        resources.srcDir file('src/main/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test, dependsOn: 'classes') {
+    group 'Verification'
+    description 'Runs the integration tests.'
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    binResultsDir = file("$buildDir/integrationTest-results/binary/integrationTest")
+    reports.junitXml.destination = "$buildDir/integrationTest-results"
+    reports.html.destination = "$buildDir/reports/integrationTest"
+    systemProperties['jar.path'] = jar.archivePath
+    systemProperties['spring.profiles.active'] = System.getProperty("profile")?: "default"
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test

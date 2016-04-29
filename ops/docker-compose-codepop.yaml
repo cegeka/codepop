@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+
+  codepop:
+    build: codepop/
+    container_name: codepop
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.data.mongodb.host=db.codepopnw
+
+networks:
+  default:
+    external:
+      name: codepopnw
