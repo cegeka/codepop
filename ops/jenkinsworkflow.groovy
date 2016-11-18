@@ -3,12 +3,12 @@ VERSION_NUMBER = ""
 VERSION_SUFFIX = ""
 NO_OPTIONS = ""
 GIT_REPOSITORY = "git@github.com:cegeka/codepop.git"
-BRANCH = "master"
+BRANCH = "demo"
 
 /******* Github stuff *******/
 GIT_REPOSITORY = "git@github.com:cegeka/codepop.git"
-GITHUB_USER = "yourgithubuser"
-GITHUB_EMAIL = "yourgithubuser@gmail.com"
+GITHUB_USER = "imanuelr"
+GITHUB_EMAIL = "imanuel.r@gmail.com"
 
 /***** Networks *****/
 JENKINS_NETWORK = "ci"
@@ -25,8 +25,8 @@ DB_CONTAINER = ""
 APP_CONTAINER = ""
 
 /****** SSH Stuff *****/
-PRD_HOST = "yourproductionserver.com"
-PRD_USER = "youruser"
+PRD_HOST = "10.0.7.13"
+PRD_USER = "vagrant"
 SSH_IDENTITY_FILE = "/var/jenkins_home/ssh_prdserver_key"
 
 /*********** Build workflow ***********/

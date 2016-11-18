@@ -9,7 +9,7 @@ COPY id_rsa /root/.ssh/id_rsa
 RUN chmod 400 /root/.ssh/id_rsa
 RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
 RUN ssh-keyscan -t rsa github.com >> /root/.ssh/known_hosts
-RUN ssh-keyscan -t rsa yourproductionserver.com >> /root/.ssh/known_hosts
+RUN ssh-keyscan -t rsa 10.0.7.13 >> /root/.ssh/known_hosts
 
 COPY config.groovy.override /usr/share/jenkins/ref/init.groovy.d/config.groovy.override
 
